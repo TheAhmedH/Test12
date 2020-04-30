@@ -2,6 +2,8 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Pair;
 import android.widget.Toast;
 
@@ -11,12 +13,16 @@ import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
+
 import java.io.IOException;
 
+@RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
 public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+
     private static MyApi myApiService = null;
     private Context context;
 
+    @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
         if(myApiService == null) {  // Only do this once

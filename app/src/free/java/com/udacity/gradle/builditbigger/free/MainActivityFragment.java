@@ -16,7 +16,11 @@ import com.udacity.gradle.builditbigger.R;
  */
 public class MainActivityFragment extends Fragment {
 
+
+
     public MainActivityFragment() {
+
+
     }
 
     @Override
@@ -31,6 +35,7 @@ public class MainActivityFragment extends Fragment {
                 tellJoke();
             }
         });
+
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
