@@ -1,11 +1,15 @@
 package com.udacity.gradle.builditbigger.paid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.jokesandroid.JokesActivity;
+import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
 import com.udacity.gradle.builditbigger.R;
 
 
@@ -13,11 +17,9 @@ import com.udacity.gradle.builditbigger.R;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
-
+String TAG = "Paind Main Fragment Class";
     public MainActivityFragment() {
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +31,7 @@ public class MainActivityFragment extends Fragment {
         root.findViewById(R.id.tellJoke_Button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Tell joke once clicked
                 tellJoke();
             }
         });
@@ -45,6 +48,14 @@ public class MainActivityFragment extends Fragment {
     }
 
     private void tellJoke() {
-
+        new EndpointsAsyncTask() {
+            @Override
+            protected void onPostExecute(String result) {
+                Log.d(TAG, "onPostExecute: ASYNC task being called ");
+                Intent intent = new Intent(getActivity(), JokesActivity.class);
+                intent.putExtra("joke", result);
+                startActivity(intent);
+            }
+        }.execute();
     }
 }

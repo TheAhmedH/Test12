@@ -5,14 +5,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Pair;
-import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
-
 
 import java.io.IOException;
 
@@ -43,18 +41,15 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
+       /* context = params[0].first;*/
+        String joke;
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+            joke = myApiService.sayJoke().execute().getData();
         } catch (IOException e) {
-            return e.getMessage();
+            joke = "There is an error";
         }
-    }
 
-    @Override
-    protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+    return joke;
     }
 }
